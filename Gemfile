@@ -32,6 +32,7 @@ gem 'devise'
 gem "select2-rails"
 gem 'ransack'
 gem 'mail_form'
+gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

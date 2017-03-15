@@ -15,4 +15,13 @@ form#user_search .select2-container {
 
 .table-bordered {
   background: #fff;
+  color: #000000;
+}
+
+.select2-results__option {
+  color: #000000 !important;
+}
+
+.select2-results__option--highlighted {
+  color: #ffffff !important;
 }
