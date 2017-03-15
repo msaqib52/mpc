@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Find online friends for multiplayer gaming</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body cz-shortcut-listen="true">
+    <div class="site-wrapper">
+      <div class="site-wrapper-inner">
+        <div class="cover-container">
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand"><%= link_to "MpC", root_path %></h3>
+              <nav>
+                <ul class="nav masthead-nav">
+                  <%= nav_link "Home", root_path %>
+                  <%= nav_link "Contact Us", new_contact_path %>
+                  <% if user_signed_in? %>
+                    <%= nav_link "Profile", edit_user_registration_path %>
+                    <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %> </li>
+                  <% else %>
+                    <%= nav_link('Sign Up', new_registration_path(:user))  %>
+                    <%= nav_link('Login', new_user_session_path)  %>
+                  <% end %>
+                </ul>
+              </nav>
+            </div>
+          <%= yield %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

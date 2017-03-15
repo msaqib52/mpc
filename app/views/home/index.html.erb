@@ -1,0 +1,68 @@
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="inner cover">
+  <% if current_user %>
+    <h1 class="cover-heading">Find Online Players</h1>
+    <p class="lead">
+      <%= search_form_for @q, url: search_home_index_path,
+                        html: { method: :post,  class: "form-inline" } do |f| %>
+        <div class="form-group">
+          <label class="sr-only" for="platform_eq">Gaming Platform</label>
+          <%= f.select :platform_eq, [['XBox','xbox'],['Playstation','playstation'],['PC','pc']], {include_blank: "Gaming Platform"}, {class: "form-control input-lg"} %>
+        </div>
+
+        <div class="form-group">
+          <label class="sr-only" for="games_id_eq">Game</label>
+          <%= f.select :games_id_eq, Game.all.collect {|g| [ g.name, g.id ] }, {include_blank: "Choose Video Game"}, { class: "form-control game-multiselect" } %>
+        </div>
+        <%= f.submit "Search", class: "btn btn-default btn-lg" %>
+      <% end %>
+    </p>
+      <% if params[:q].present? %>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th><%= get_column_name %></th>
+            <th>Platform</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @users.present? %>
+            <% @users.each.with_index(1) do |user, index| %>
+              <tr>
+                <th scope="row"><%= index %></th>
+                <td><%= user.name %></td>
+                <td><%= user.gamer_tag %></td>
+                <td><%= user.platform %></td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <th colspan="4" style="text-align: center;">No players found, Please invite your friends to Sign up.</th>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <% end%>
+  <% else %>
+  <h1 class="cover-heading">MultiPlayers Club</h1>
+  <p class="lead">MultiPlayers Club is where online video game players find each other. Sign up now and be friends with thousands of players ready to play online games.</p>
+  <p class="lead">
+  <%= link_to('Sign Up', new_registration_path(:user), class: "btn btn-lg btn-default")  %>
+  </p>
+  <% end %>
+</div>
+
+<div class="mastfoot">
+  <div class="inner">
+    <p>MultiPlayers Club © <%= DateTime.now.year %></p>
+  </div>
+</div>
+
+
